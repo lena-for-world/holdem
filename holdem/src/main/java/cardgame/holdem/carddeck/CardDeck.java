@@ -29,12 +29,21 @@ public class CardDeck {
         cardList.add(new Card("JOKER", 14, true));
         cardList.add(new Card("JOKER", 14, false));
     }
-    // 카드를 랜덤으로 뽑음
-    // 파라미터로 뽑는 카드의 수 들어감
-    // 오픈카드인지, 플레이어 카드인지
-   /* Card draw(int howMany) {
-        // 랜덤으로 뽑고, 뽑은거 표시
+
+    public Integer[] getUsed() {
+        return used;
     }
-*/
+
+    public void setUsed(Integer[] used) {
+        this.used = used;
+    }
+
+    public List<Card> getCardList() {
+        return cardList;
+    }
+
+    public void setCardList(List<Card> cardList) {
+        this.cardList = cardList;
+    }
 
 }

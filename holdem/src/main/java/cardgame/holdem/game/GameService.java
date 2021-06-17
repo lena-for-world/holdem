@@ -7,14 +7,16 @@ import java.util.Map;
 
 public interface GameService {
 
-    Game start(Game game);
+    void start(Game game);
 
     Map<Long, Player> waiting(PlayerRepository playerRepository);
 
     void join(Player player);
 
-    void whatHappensNow();
+    void whatHappensNow(Game game);
 
     void end();
+
+    int judge(Game game);
 
 }

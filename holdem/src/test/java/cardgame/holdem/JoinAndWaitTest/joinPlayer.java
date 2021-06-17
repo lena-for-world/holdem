@@ -17,6 +17,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class joinPlayer {
@@ -28,13 +33,13 @@ public class joinPlayer {
 
     @Test
     @DisplayName("참여 확인")
-    void joinPlayer() {
+    void joinAndStart() {
         gameService = ac.getBean(GameService.class);
         playerRepository = ac.getBean(PlayerRepository.class);
-        Player player1 = new Player(1L, 60000, "Karina");
-        Player player2 = new Player(2L, 30000, "Jiselle");
-        Player player3 = new Player(3L, 15000, "Winter");
-        Player player4 = new Player(4L, 50000, "NingNing");
+        Player player1 = new Player(1L, 60000, "Karina", true);
+        Player player2 = new Player(2L, 30000, "Jiselle", false);
+        Player player3 = new Player(3L, 15000, "Winter", false);
+        Player player4 = new Player(4L, 50000, "NingNing", false);
 
         gameService.join(player1);
         gameService.join(player2);
@@ -43,7 +48,9 @@ public class joinPlayer {
         Map<Long, Player> m = playerRepository.getPlayerGroup();
         Assertions.assertThat(m.size()).isEqualTo(4);
 
-        Game newGame = gameService.start(new Game(gameService.waiting(playerRepository), new CardDeck(), 0, 0, GameProcess.PreFlop));
+
+        Game newGame = new Game(gameService.waiting(playerRepository), new CardDeck(), 0, GameProcess.PreFlop);
+        gameService.start(newGame);
         Map<Long, Player> newGameParticipants = newGame.getParticipants();
         for(Map.Entry<Long, Player> participant : newGameParticipants.entrySet()) {
             System.out.println("participant = " + participant.getValue().getNickname());

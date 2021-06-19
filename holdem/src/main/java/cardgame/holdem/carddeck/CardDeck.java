@@ -11,11 +11,12 @@ import java.util.List;
 public class CardDeck {
 
     String[] CardPattern = new String[] {"SPADE", "DIAMOND", "HEART", "CLOVER"};
-    Integer[] used = new Integer[54];
+    Integer[] used = new Integer[52];
     List<Card> cardList = new ArrayList<>();
 
+    // 1==A 2-10 11==J 12==Q 13==K 14==JOKER
     public CardDeck() {
-        for(int j = 0; j < 54; j++) {
+        for(int j = 0; j < 52; j++) {
             used[j] = 0;
         }
         for(int j = 0; j < 4; j++) {
@@ -26,8 +27,8 @@ public class CardDeck {
                 cardList.add(card);
             }
         }
-        cardList.add(new Card("JOKER", 14, true));
-        cardList.add(new Card("JOKER", 14, false));
+       // cardList.add(new Card("JOKER", 14, true));
+       // cardList.add(new Card("JOKER", 14, false));
     }
 
     public Integer[] getUsed() {

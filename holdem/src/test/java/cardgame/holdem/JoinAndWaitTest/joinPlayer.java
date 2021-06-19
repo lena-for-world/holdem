@@ -1,6 +1,7 @@
 package cardgame.holdem.JoinAndWaitTest;
 
 import cardgame.holdem.AutoAppConfig;
+import cardgame.holdem.carddeck.Card;
 import cardgame.holdem.carddeck.CardDeck;
 import cardgame.holdem.game.Game;
 import cardgame.holdem.game.GameProcess;
@@ -38,7 +39,7 @@ public class joinPlayer {
         playerRepository = ac.getBean(PlayerRepository.class);
         Player player1 = new Player(1L, 60000, "Karina", true);
         Player player2 = new Player(2L, 30000, "Jiselle", false);
-        Player player3 = new Player(3L, 15000, "Winter", false);
+        Player player3 = new Player(3L, 45000, "Winter", false);
         Player player4 = new Player(4L, 50000, "NingNing", false);
 
         gameService.join(player1);
@@ -50,7 +51,17 @@ public class joinPlayer {
 
 
         Game newGame = new Game(gameService.waiting(playerRepository), new CardDeck(), 0, GameProcess.PreFlop);
+
         gameService.start(newGame);
+
+        Card[][] cards = newGame.getPlayerCards();
+        for(int i = 0; i < newGame.getParticipants().size(); i++) {
+            System.out.print("cards : ");
+            for(int j = 0; j < 2; j++) {
+                System.out.print(cards[i][j].getCardType() + " " + cards[i][j].getNumber() + " ");
+            }
+            System.out.println();
+        }
         Map<Long, Player> newGameParticipants = newGame.getParticipants();
         for(Map.Entry<Long, Player> participant : newGameParticipants.entrySet()) {
             System.out.println("participant = " + participant.getValue().getNickname());

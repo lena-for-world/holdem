@@ -36,7 +36,7 @@ public class Turn {
         // 1장의 오픈카드를 깜
         j = 0;
         while(j < 1) {
-            temp = rand.nextInt(54);
+            temp = rand.nextInt(52);
             if(used[temp] != 0) continue;
             else {
                 used[temp] = 1;

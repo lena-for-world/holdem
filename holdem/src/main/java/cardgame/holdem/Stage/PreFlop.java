@@ -62,7 +62,7 @@ public class PreFlop {
             j = 0;
             // player당 2장씩 배포
             while(j < 2) {
-                temp = rand.nextInt(54);
+                temp = rand.nextInt(52);
                 if(used[temp] != 0) continue;
                 else {
                     used[temp] = 1;
